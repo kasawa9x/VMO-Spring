@@ -1,0 +1,71 @@
+package com.vmo.springdemo.demo1.service.impl;
+
+import com.vmo.springdemo.demo1.exception.ProductNotFoundException;
+import com.vmo.springdemo.demo1.models.Product;
+import com.vmo.springdemo.demo1.repository.ProductRepository;
+import com.vmo.springdemo.demo1.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class ProductServiceImpl implements ProductService {
+    public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Override
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    @Override
+    public List<Product> getAllProduct() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Product updateProduct(Product product) {
+        Product existingProduct = productRepository.findById(product.getId()).orElse(null);
+        existingProduct.setName(product.getName());
+        existingProduct.setQuantity(product.getQuantity());
+        existingProduct.setPrice(product.getPrice());
+
+//        String imageUUID;
+//        if(!fileProductImage.isEmpty()){
+//            imageUUID = fileProductImage.getOriginalFilename();
+//            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+//            try {
+//                Files.write(fileNameAndPath, fileProductImage.getBytes());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }else {
+//            imageUUID = imgName;
+//        }//save image
+//        existingProduct.setImageName(product.setImageName(imageUUID));
+        return productRepository.save(existingProduct);
+    }
+
+    @Override
+    public String removeProductById(int id) {
+        productRepository.deleteById(id);
+        return "product removed !! " + id;
+    }
+
+    @Override
+    public Product getProductById(int id) {
+
+        return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+    }
+
+    @Override
+    public Product getProductByName(String name) {
+        return productRepository.findByName(name);    }
+
+    @Override
+    public List<Product> getAllProductByCategoryId(int id) {
+        return productRepository.findAllByCategory_Id(id);
+    }
+}
