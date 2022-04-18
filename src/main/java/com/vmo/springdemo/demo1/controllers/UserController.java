@@ -6,12 +6,14 @@ import com.vmo.springdemo.demo1.repository.UserRepository;
 import com.vmo.springdemo.demo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Optional;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/")
 public class UserController {
     @Autowired
     UserService userService;
@@ -40,7 +42,7 @@ public class UserController {
         return "Admin Board.";
     }
     @GetMapping("/transfer")
-    public User transferMoneyPage(Principal principal){
+    public Optional<User> transferMoneyPage(Principal principal){
 
         return userService.findByName(principal.getName());
     }

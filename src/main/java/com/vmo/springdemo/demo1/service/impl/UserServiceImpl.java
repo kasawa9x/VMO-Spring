@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Transactional(rollbackFor = Exception.class)
@@ -17,8 +18,8 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public User findByName(String name) {
-        return userRepository.findByName(name);
+    public Optional<User> findByName(String name) {
+        return userRepository.findByUsername(name);
     }
 
     @Transactional
