@@ -15,6 +15,12 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Override
+    public User findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
     @Transactional
     @Override
     public void transfer(String sender, String receiver, Double amount) {
