@@ -34,13 +34,14 @@ public class UserServiceImpl implements UserService {
     public void deduct(String sender, double amount) {
         User fromUser = userRepository.findByUsername(sender).get();
         double coin = fromUser.getCoin();
-        if (coin<amount){
+        if (coin < amount) {
             throw new IllegalStateException("Not enough money");
         } else {
             fromUser.setCoin(coin - amount);
             userRepository.save(fromUser);
         }
     }
+
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public void deposit(String receiver, double amount) {

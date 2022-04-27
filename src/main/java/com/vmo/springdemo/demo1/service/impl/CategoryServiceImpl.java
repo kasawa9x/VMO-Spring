@@ -1,6 +1,8 @@
 package com.vmo.springdemo.demo1.service.impl;
 
 
+import com.vmo.springdemo.demo1.dto.CategoryDTO;
+import com.vmo.springdemo.demo1.dto.CategoryMapper;
 import com.vmo.springdemo.demo1.models.Category;
 import com.vmo.springdemo.demo1.repository.CategoryRepository;
 import com.vmo.springdemo.demo1.service.CategoryService;
@@ -13,8 +15,11 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryMapper categoryMapper;
+
     @Override
-    public List<Category> getAllCategory(){
+    public List<Category> getAllCategory() {
         return categoryRepository.findAll();
     }//findAll
 
@@ -23,17 +28,21 @@ public class CategoryServiceImpl implements CategoryService {
         Category existingCat = categoryRepository.findById(category.getId()).orElse(null);
         existingCat.setName(category.getName());
 
-       return categoryRepository.save(existingCat);
+        return categoryRepository.save(existingCat);
     }
+
     @Override
-    public Category saveCategory(Category category){categoryRepository.save(category);
+    public Category saveCategory(Category category) {
+        categoryRepository.save(category);
         return category;
     }
+
     @Override
-    public String removeCategoryById(int id){
+    public String removeCategoryById(int id) {
         categoryRepository.deleteById(id);
         return "category removed !! " + id;
     }
+
     @Override
     public Category getCategoryById(int id) {
         return categoryRepository.findById(id).orElse(null);

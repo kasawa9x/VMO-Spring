@@ -1,4 +1,4 @@
-package com.vmo.springdemo.demo1.security;
+package com.vmo.springdemo.demo1.configuration;
 
 import com.vmo.springdemo.demo1.security.jwt.AuthEntryPointJwt;
 import com.vmo.springdemo.demo1.security.jwt.AuthTokenFilter;
@@ -21,9 +21,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-    // securedEnabled = true,
-    // jsr250Enabled = true,
-    prePostEnabled = true)
+        securedEnabled = true,
+        jsr250Enabled = true,
+        prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   UserDetailsServiceImpl userDetailsService;
@@ -57,11 +57,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http.cors().and().csrf().disable()
       .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-      .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-      .antMatchers(HttpMethod.GET,"/api/**").access("hasRole('ROLE_ADMIN')")
+      .authorizeRequests().antMatchers("/api/**").permitAll()
+//      .antMatchers(HttpMethod.GET,"/api/**").access("hasRole('ROLE_ADMIN')")
       .antMatchers("/api/test/**").permitAll()
       .anyRequest().authenticated();
-
+//    http
+//            .logout()
+//            .logoutUrl("/api/auth/logout")
+//            .deleteCookies("JSESSIONID")
+//            .and()
+//            .exceptionHandling();
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 }

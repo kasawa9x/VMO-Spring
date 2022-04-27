@@ -20,7 +20,7 @@ public class Product {
     private String name;
     private int quantity;
     private double price;
-//    private String imageName;
+    //    private String imageName;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
 //    @NotEmpty

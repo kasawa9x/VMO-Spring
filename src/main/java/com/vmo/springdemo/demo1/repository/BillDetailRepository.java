@@ -11,7 +11,10 @@ import java.util.List;
 
 @Repository
 public interface BillDetailRepository extends JpaRepository<BillDetail, Integer> {
-    List<BillDetail> findBillByBill_Id(@Param("bill_id") int bill_id );
+    List<BillDetail> findBillDetailByBillId(@Param("bill_id") int bill_id);
+
+    @Query(value = "SELECT * FROM billdetail_tbl WHERE bill_id =  ?1", nativeQuery = true)
+    List<BillDetail> listBillDetailByBillId(@Param("bill_id") int bill_id);
 
     @Query(value = "SELECT SUM(price) FROM bill_detail WHERE bill_id =  ?1", nativeQuery = true)
     long totalMoney(int billId) throws SQLException;

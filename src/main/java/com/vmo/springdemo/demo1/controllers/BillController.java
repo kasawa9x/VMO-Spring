@@ -25,11 +25,10 @@ public class BillController {
     UserRepository userRepository;
 
     @PostMapping("/order")
-    public ResponseEntity<ApiResponse> placeOrder( Principal principal) {
+    public ResponseEntity<ApiResponse> placeOrder(Principal principal) {
         User user = userRepository.findByUsername(principal.getName()).get();
         // place the order
         billService.saveBill(user);
-
         return new ResponseEntity<>(new ApiResponse(true, "Order has been placed"), HttpStatus.CREATED);
     }
 
@@ -41,10 +40,15 @@ public class BillController {
     }
 
     @GetMapping("bill/historyAdmin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<Bill> historyOrdeAdmin(Model model) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public List<Bill> historyOrdeAdmin() {
         return billService.getAllBill();
     }
 
+    @GetMapping("/order/{id}")
+    public ResponseEntity<Object> getOrderById(@PathVariable("id") Integer id) {
+        Bill bill = billService.getBillById(id);
+        return new ResponseEntity<>(bill, HttpStatus.OK);
+    }
 
 }

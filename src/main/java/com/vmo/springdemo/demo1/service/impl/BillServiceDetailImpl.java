@@ -41,7 +41,7 @@ public class BillServiceDetailImpl implements BillDetailService {
 
     @Override
     public List<BillDetail> findBillDetailByBillId(int id) {
-        return billDetailRepository.findBillByBill_Id(id);
+        return billDetailRepository.listBillDetailByBillId(id);
     }
 
     @Override

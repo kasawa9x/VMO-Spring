@@ -7,8 +7,11 @@ import java.util.Optional;
 
 @Service
 public interface UserService {
-    Optional<User> findByName(String name) ;
+    Optional<User> findByName(String name);
+
     void transfer(String sender, String receiver, Double amount);
+
     void deduct(String sender, double amount);
+
     void deposit(String receiver, double amount);
 }

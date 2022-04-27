@@ -6,17 +6,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transfer {
-    String senderName;
+//    String senderName;
     String receiverName;
     double amount;
 
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
-    }
+//    public String getSenderName() {
+//        return senderName;
+//    }
+//
+//    public void setSenderName(String senderName) {
+//        this.senderName = senderName;
+//    }
 
     public String getReceiverName() {
         return receiverName;

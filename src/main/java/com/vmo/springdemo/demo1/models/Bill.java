@@ -12,15 +12,10 @@ public class Bill {
     @Column(name = "bill_id")
     private int id;
     private Date createdDate;
-
-
     private long price;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
-
-
-
     public Bill() {
 
     }
@@ -32,7 +27,6 @@ public class Bill {
     public void setId(int id) {
         this.id = id;
     }
-
 
 
     public Date getCreatedDate() {
