@@ -10,6 +10,7 @@ import com.vmo.springdemo.demo1.repository.BillRepository;
 import com.vmo.springdemo.demo1.service.BillDetailService;
 import com.vmo.springdemo.demo1.service.BillService;
 import com.vmo.springdemo.demo1.service.CartService;
+import com.vmo.springdemo.demo1.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,9 @@ public class BillServiceImpl implements BillService {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private BillDetailRepository billDetailRepository;
@@ -59,8 +63,8 @@ public class BillServiceImpl implements BillService {
             billDetailRepository.save(billDetail);
         }
 
+        productService.reductionQuantity(user);
         cartService.deleteUserCartItems(user);
-
     }
 
     @Override
