@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.security.Principal;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class BillController {
     UserRepository userRepository;
 
     @PostMapping("/order")
-    public ResponseEntity<ApiResponse> placeOrder(Principal principal) {
+    public ResponseEntity<ApiResponse> placeOrder(Principal principal) throws MessagingException {
         User user = userRepository.findByUsername(principal.getName()).get();
         // place the order
         billService.saveBill(user);
@@ -50,5 +51,4 @@ public class BillController {
         Bill bill = billService.getBillById(id);
         return new ResponseEntity<>(bill, HttpStatus.OK);
     }
-
 }

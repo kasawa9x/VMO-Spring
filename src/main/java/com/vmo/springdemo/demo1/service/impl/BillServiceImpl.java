@@ -7,13 +7,11 @@ import com.vmo.springdemo.demo1.models.Cart.CartItem;
 import com.vmo.springdemo.demo1.models.User;
 import com.vmo.springdemo.demo1.repository.BillDetailRepository;
 import com.vmo.springdemo.demo1.repository.BillRepository;
-import com.vmo.springdemo.demo1.service.BillDetailService;
-import com.vmo.springdemo.demo1.service.BillService;
-import com.vmo.springdemo.demo1.service.CartService;
-import com.vmo.springdemo.demo1.service.ProductService;
+import com.vmo.springdemo.demo1.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +30,8 @@ public class BillServiceImpl implements BillService {
 
     @Autowired
     private BillDetailRepository billDetailRepository;
+    @Autowired
+    private MailService mailService;
 
     @Override
     public List<Bill> getAllBill() {
@@ -39,7 +39,7 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public void saveBill(User user) {
+    public void saveBill(User user) throws MessagingException {
         CartDto cartDto = cartService.listCartItem(user);
 
         List<CartItem> cartItemList = cartDto.getcartItems();
@@ -65,6 +65,7 @@ public class BillServiceImpl implements BillService {
 
         productService.reductionQuantity(user);
         cartService.deleteUserCartItems(user);
+        mailService.sendMail(user);
     }
 
     @Override
