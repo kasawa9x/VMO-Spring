@@ -23,6 +23,7 @@ public class UserController {
     BillService billService;
     @Autowired
     private UserRepository userRepository;
+
     @GetMapping("/all")
     public String allAccess() {
         return "Public Content.";
@@ -45,16 +46,18 @@ public class UserController {
     public String adminAccess() {
         return "Admin Board.";
     }
+
     @GetMapping("/transfer")
-    public String transferMoneyPage(Principal principal){
+    public String transferMoneyPage(Principal principal) {
         User user = userService.findByName(principal.getName()).get();
         int coin = (int) user.getCoin();
-        return "User "+principal.getName()+" has "+coin+" coin";
+        return "User " + principal.getName() + " has " + coin + " coin";
     }
+
     @PostMapping("/transfer")
-    public String transferMoney(Principal principal,@RequestBody Transfer transferForm){
+    public String transferMoney(Principal principal, @RequestBody Transfer transferForm) {
         Transfer form = transferForm;
-        String username = principal.getName() ;
+        String username = principal.getName();
         User user = userService.findByName(principal.getName()).get();
         int coin = (int) user.getCoin();
         System.out.println(username);
@@ -63,9 +66,9 @@ public class UserController {
                 form.getAmount());
 //                form.getSenderName(),
 
-        return "Transfer "+form.getAmount()
-                + " coin complete from "+username
-                +" to "+form.getReceiverName()+" "+coin;
+        return "Transfer " + form.getAmount()
+                + " coin complete from " + username
+                + " to " + form.getReceiverName() + " " + coin;
     }
 
 

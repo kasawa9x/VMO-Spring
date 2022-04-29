@@ -13,7 +13,7 @@ public interface CartService {
 
     CartDto listCartItem(User user);
 
-    Cart updateCart(AddToCart addToCart,User user, Product product);
+    Cart updateCart(AddToCart addToCart, User user, Product product);
 
 
     void removeCartItem(int id, Long userId);

@@ -21,7 +21,7 @@ public class BillDetailController {
     //view bill Details
     @GetMapping("/billdetail/{billId}")
     public List<BillDetail> billDetail(@PathVariable("billId") Integer billId) {
-        List<BillDetail> billDetail =  billDetailService.findBillDetailByBillId(billId);
+        List<BillDetail> billDetail = billDetailService.findBillDetailByBillId(billId);
         return billDetail;
     }
 }

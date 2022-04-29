@@ -46,6 +46,6 @@ public class BillServiceDetailImpl implements BillDetailService {
 
     @Override
     public long totalMoney(int billId) throws SQLException {
-        return billDetailRepository . totalMoney (billId);
+        return billDetailRepository.totalMoney(billId);
     }
 }

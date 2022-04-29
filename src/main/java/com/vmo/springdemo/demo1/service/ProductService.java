@@ -20,7 +20,7 @@ public interface ProductService {
 
     Product getProductByName(String name);
 
-    void reductionQuantity( User user);
+    void reductionQuantity(User user);
 
     List<Product> getAllProductByCategoryId(int id);
 

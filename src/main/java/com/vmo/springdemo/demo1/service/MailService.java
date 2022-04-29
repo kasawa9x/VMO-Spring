@@ -7,5 +7,5 @@ import javax.mail.MessagingException;
 
 @Service
 public interface MailService {
-    void sendMail( User user) throws MessagingException;
+    void sendMail(User user) throws MessagingException;
 }

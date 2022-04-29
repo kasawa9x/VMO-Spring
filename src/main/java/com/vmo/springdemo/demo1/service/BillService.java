@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.util.List;
+
 @Service
 public interface BillService {
     List<Bill> getAllBill();
@@ -16,6 +17,6 @@ public interface BillService {
 
     Bill getBillById(int id);
 
-    List<Bill> findBillByUserId (long userId);
+    List<Bill> findBillByUserId(long userId);
 
 }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transfer {
-//    String senderName;
+    //    String senderName;
     String receiverName;
     double amount;
 

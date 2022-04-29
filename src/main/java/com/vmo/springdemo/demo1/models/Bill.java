@@ -16,6 +16,7 @@ public class Bill {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
+
     public Bill() {
 
     }

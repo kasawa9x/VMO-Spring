@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Component
 public class CartServiceImpl implements CartService {
     @Autowired
@@ -36,8 +37,8 @@ public class CartServiceImpl implements CartService {
             CartItem cartItem = getCartItemFromCart(cart);
             cartItemList.add(cartItem);
         }
-        for (CartItem cartItem :cartItemList){
-            totalCost +=  (cartItem.getProduct().getPrice()* cartItem.getQuantity());
+        for (CartItem cartItem : cartItemList) {
+            totalCost += (cartItem.getProduct().getPrice() * cartItem.getQuantity());
             System.out.println(cartItem);
         }
         return new CartDto(cartItemList, totalCost);

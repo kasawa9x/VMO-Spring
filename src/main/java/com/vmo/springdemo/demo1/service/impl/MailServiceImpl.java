@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
 @Component
 public class MailServiceImpl implements MailService {
     @Autowired
     public JavaMailSender javaMailSender;
+
     @SneakyThrows
     @Override
     public void sendMail(User user) throws MessagingException {

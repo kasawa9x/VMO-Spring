@@ -68,7 +68,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody  SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -88,7 +88,10 @@ public class AuthController {
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
-
+        //Before, insert data
+        //INSERT INTO `vmo_spring`.`roles` (`name`) VALUES ('ROLE_USER');
+        //INSERT INTO `vmo_spring`.`roles` (`name`) VALUES ('ROLE_MODERATOR');
+        //INSERT INTO `vmo_spring`.`roles` (`name`) VALUES ('ROLE_ADMIN');
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));

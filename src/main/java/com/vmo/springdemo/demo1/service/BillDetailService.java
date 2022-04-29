@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+
 @Service
 public interface BillDetailService {
     List<BillDetail> getAllBillDetail();
@@ -15,7 +16,7 @@ public interface BillDetailService {
 
     BillDetail getBillDetailById(int id);
 
-    List<BillDetail> findBillDetailByBillId (int id);
+    List<BillDetail> findBillDetailByBillId(int id);
 
     long totalMoney(int billId) throws SQLException;
 

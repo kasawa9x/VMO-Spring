@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void reductionQuantity( User user) {
+    public void reductionQuantity(User user) {
         CartDto cartDto = cartService.listCartItem(user);
 
         List<CartItem> cartItemList = cartDto.getcartItems();
